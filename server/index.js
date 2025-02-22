@@ -56,6 +56,12 @@ const yoga = createYoga({
       secret: request.headers.get("secret"),
     };
   },
+  cors: {
+    origin: '*',
+    credentials: true,
+    allowedHeaders: ['X-Custom-Header', "content-type"],
+    methods: ['POST']
+  }
 });
 
 const server = createServer(yoga);
