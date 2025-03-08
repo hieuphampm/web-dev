@@ -15,9 +15,9 @@ function Category() {
         }
     }, [data]);
 
-    if (loading) return "Loading...";
-    if (error) return <pre>{error.message}</pre>;
-    if (!data?.category) return <p>Category not found</p>; 
+    if (loading) return <div className="text-center text-lg">Loading...</div>;
+    if (error) return <pre className="text-red-500">{error.message}</pre>;
+    if (!data?.category) return <p className="text-gray-600">Category not found</p>; 
 
     const handleUpdate = async (e) => {
         e.preventDefault();
@@ -26,18 +26,23 @@ function Category() {
     };
 
     return (
-        <div>
-            <h2>Category: {data.category.name}</h2>
-            <form onSubmit={handleUpdate}>
+        <div className="max-w-lg mx-auto p-4">
+            <h2 className="text-3xl font-bold text-white-800 mb-4">Category: {data.category.name}</h2>
+            <form onSubmit={handleUpdate} className="flex items-center gap-2">
                 <input 
                     type="text" 
                     value={name} 
                     onChange={(e) => setName(e.target.value)} 
                     placeholder="Update category name" 
                     required 
-                    style={{height:'30px', borderRadius: '10px'}}
+                    className="border border-gray-300 rounded-md px-3 py-2 w-full focus:ring focus:ring-blue-300"
                 />
-                <button type="submit" style={{marginLeft:'20px'}}>Update</button>
+                <button 
+                    type="submit" 
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                >
+                    Update
+                </button>
             </form>
         </div>
     );
