@@ -1,0 +1,9 @@
+ frontend:
+    build: ./frontend
+    image: frontend_image
+    container_name: frontend
+    command: bash -c "npm start"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/data/app

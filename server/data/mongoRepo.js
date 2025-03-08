@@ -1,4 +1,4 @@
-import { Category } from "./models/index.js";
+import { Category, User } from "./models/index.js";
 
 const db = {
   categories: {
@@ -24,6 +24,12 @@ const db = {
         { new: true }   
       );
       return updated;
+    },
+  },
+
+  users: {
+    findOne: async (username) => {
+      return await User.findOne({ username }).lean();
     },
   },
 };

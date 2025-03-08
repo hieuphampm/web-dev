@@ -35,6 +35,12 @@ import { typeDef as salute, resolvers as saluteResolvers } from "./salute.js";
 import { typeDef as products, resolvers as productsResolvers } from "./products.js";
 import { typeDef as categories, resolvers as categoriesResolvers } from "./categories.js";
 
+import {
+  typeDef as login,
+  resolvers as loginResolvers,
+} from "./authentication.js";
+
+
 const query = `
   type Query {
     _empty: String
@@ -45,12 +51,13 @@ const query = `
   }
 `;
 
-const typeDefs = [query, hello, salute, categories, products];
+const typeDefs = [query, hello, salute, categories, products, login];
 const resolvers = _.merge(
   helloResolvers,
   saluteResolvers,
   categoriesResolvers,
-  productsResolvers
+  productsResolvers,
+  loginResolvers
 );
 
 export const schema = createSchema({
