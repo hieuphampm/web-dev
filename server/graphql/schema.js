@@ -1,47 +1,16 @@
-// import { createSchema } from "graphql-yoga";
-// import _ from "lodash";
-
-// import { typeDef as hello, resolvers as helloResolvers } from "./hello.js";
-// import { typeDef as salute, resolvers as saluteResolvers } from "./salute.js";
-// import { typeDef as products, resolvers as productsResolvers } from "./products.js";
-// import {
-//   typeDef as categories,
-//   resolvers as categoriesResolvers,
-// } from "./categories.js";
-
-// const query = `
-//   type Query {
-//     _empty: String
-//   }
-
-//   type Mutation {
-//     _emptyAction: String
-//   }
-// `;
-// const typeDefs = [query, hello, salute, categories, products];
-// const resolvers = _.merge(helloResolvers, saluteResolvers, categoriesResolvers, productsResolvers);
-
-// export const schema = createSchema({
-//   typeDefs: typeDefs,
-//   resolvers: resolvers,
-// });
-
-
 import { createSchema } from "graphql-yoga";
 import _ from "lodash";
 
+// Import từng module GraphQL
 import { typeDef as hello, resolvers as helloResolvers } from "./hello.js";
 import { typeDef as salute, resolvers as saluteResolvers } from "./salute.js";
 import { typeDef as products, resolvers as productsResolvers } from "./products.js";
 import { typeDef as categories, resolvers as categoriesResolvers } from "./categories.js";
+import { typeDef as login, resolvers as loginResolvers } from "./authentication.js";
+import { typeDefs as serviceTypeDefs, resolvers as serviceResolvers } from "./graphql/Services.js";  // ✅ Fix
 
-import {
-  typeDef as login,
-  resolvers as loginResolvers,
-} from "./authentication.js";
-
-
-const query = `
+// 🛠 Định nghĩa Query và Mutation gốc
+const baseTypeDefs = `#graphql
   type Query {
     _empty: String
   }
@@ -51,15 +20,28 @@ const query = `
   }
 `;
 
-const typeDefs = [query, hello, salute, categories, products, login];
+// 🔗 Gom tất cả typeDefs lại
+const typeDefs = [
+  baseTypeDefs, 
+  hello, 
+  salute, 
+  categories, 
+  products, 
+  login, 
+  serviceTypeDefs
+];
+
+// 🔗 Gom tất cả resolvers lại
 const resolvers = _.merge(
   helloResolvers,
   saluteResolvers,
   categoriesResolvers,
   productsResolvers,
-  loginResolvers
+  loginResolvers,
+  serviceResolvers
 );
 
+// 🚀 Tạo schema GraphQL
 export const schema = createSchema({
   typeDefs,
   resolvers,
