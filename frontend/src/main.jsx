@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 const client = new ApolloClient({
-    uri: "https://glorious-engine-v7g4pqv6946fwjx-4000.app.github.dev",
+    uri: "https://ubiquitous-space-halibut-v74wq74wpgw2xx77-4000.app.github.dev/",
     cache: new InMemoryCache(),
     fetchOptions: {
       mode: "cors"
